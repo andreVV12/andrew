@@ -1,13 +1,13 @@
 import numpy as np
 
 
-def prod_non_zero_diag2(x):
-    d = np.diag(X)
+def prod_non_zero_diag(x):
+    d = np.diag(x)
     return d[d != 0].prod()
     pass
 
 
-def are_multisets_equal2(x, y):
+def are_multisets_equal(x, y):
     x_n, x_c = np.unique(x, return_counts=True)
     y_n, y_c = np.unique(y, return_counts=True)
     if(np.shape(x_n) != np.shape(y_n)):
@@ -18,26 +18,15 @@ def are_multisets_equal2(x, y):
     pass
 
 
-def max_after_zero2(x):
-    a = np.ones((1))
-    a = np.hstack((curr, x))
-    b = a == 0
-    return np.max(b[ind[:-1]])
+def max_after_zero(x):
+    num = np.where(x[:len(x) - 1] == 0)
+    num = np.array(num) + 1
+    return np.max(x[(num.tolist())])
     pass
 
 
 def convert_image(img, coefs):
-    """Sum up image channels with weights from coefs array
-
-    input:
-    img -- 3-d numpy array (H x W x 3)
-    coefs -- 1-d numpy array (length 3)
-    output:
-    img -- 2-d numpy array
-
-    Vectorized implementation.
-    """
-
+    return np.sum(img * coefs, axis = -1)
     pass
 
 
@@ -51,15 +40,8 @@ def run_length_encoding(x):
     pass
 
 
+
+
 def pairwise_distance(x, y):
-    """Return pairwise object distance.
-
-    input:
-    x, y -- 2d numpy arrays
-    output:
-    distance array -- 2d numpy array
-
-    Vctorized implementation.
-    """
-
+    return np.sqrt(np.sum((x[:, np.newaxis] - x) ** 2, axis = -1))
     pass

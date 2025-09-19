@@ -4,7 +4,7 @@ def prod_non_zero_diag(x):
     for i in range(l):
         if(x[i][i]):
             p *= x[i][i]
-    return p
+    return p    
     pass
 
 
@@ -30,17 +30,18 @@ def max_after_zero(x):
 
 
 def convert_image(img, coefs):
-    """Sum up image channels with weights from coefs array
-
-    input:
-    img -- 3-d numpy array (H x W x 3)
-    coefs -- 1-d numpy array (length 3)
-    output:
-    img -- 2-d numpy array
-
-    Not vectorized implementation.
-    """
-
+    height = len(img)
+    width = len(img[0])
+    res_img = list()
+    for i in range(height): 
+        now_str = list()
+        for j in range(width):
+            sum = 0
+            for k in range(len(coefs)):
+                sum += img[i][j][k] * coefs[k]
+            now_str.append(sum)
+        res_img.append(now_str)
+    return res_img
     pass
 
 
@@ -61,14 +62,14 @@ def run_length_encoding(x):
 
 
 def pairwise_distance(x, y):
-    """Return pairwise object distance.
-
-    input:
-    x, y -- 2d numpy arrays
-    output:
-    distance array -- 2d numpy array
-
-    Not vectorized implementation.
-    """
-
+    rasst = list()
+    for i in range(len(x)):
+        ans = list()
+        for j in range(len(y)):
+            b = 0
+            for k in range(len(x[0])):
+                b += (x[i][k] - y[j][k]) ** 2
+            ans.append(math.sqrt(b))
+        rasst.append(ans)
+    return rasst
     pass
